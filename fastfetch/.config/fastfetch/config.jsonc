@@ -1,0 +1,105 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/logo/shinji.png",
+    "type": "kitty-direct",
+    "width": 26,
+    "height": 18,
+    "preserveAspectRatio": false,
+    "color": {
+      "1": "#CBA6F7",
+      "2": "#89B4FA"
+    }
+  },
+  "display": {
+    "separator": " => ",
+    "color": {
+      "separator": "#89B4FA",
+      "title": "#CBA6F7",
+      "keys": "#CDD6F4",
+      "output": "#CDD6F4"
+    }
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "  MHIA デバイス情報 \n",
+      "color": "#F5C2E7",
+    },
+    {
+      "type": "os",
+      "key": "OS",
+      "format": "{pretty-name}",
+      "keyColor": "#CBA6F7"
+    },
+    {
+      "type": "kernel",
+      "key": "Kernel",
+      "format": "{release}",
+      "keyColor": "#89B4FA"
+    },
+    {
+      "type": "uptime",
+      "key": "Uptime",
+      "keyColor": "#A6E3A1"
+    },
+    {
+      "type": "packages",
+      "key": "Packages",
+      "keyColor": "#F9E2AF"
+    },
+    {
+      "type": "shell",
+      "key": "Shell",
+      "format": "{pretty-name}",
+      "keyColor": "#74C7EC"
+    },
+    {
+      "type": "display",
+      "key": "Resolution",
+      "format": "{width}x{height} @ {refresh-rate}Hz",
+      "keyColor": "#F5C2E7"
+    },
+    {
+      "type": "wm",
+      "key": "WM",
+      "format": "{pretty-name}",
+      "keyColor": "#F2CDCD"
+    },
+    {
+      "type": "terminal",
+      "key": "Terminal",
+      "format": "{pretty-name}",
+      "keyColor": "#94E2D5"
+    },
+    {
+      "type": "cpu",
+      "key": "CPU",
+      "format": "{name}",
+      "keyColor": "#F38BA8"
+    },
+    {
+      "type": "gpu",
+      "key": "GPU",
+      "format": "{name}",
+      "keyColor": "#FAB387"
+    },
+    {
+      "type": "memory",
+      "key": "Memory",
+      "format": "{used} / {total} ({percentage}%)",
+      "keyColor": "#EBA0AC"
+    },
+    {
+      "type": "disk",
+      "key": "Disk",
+      "folders": "/",
+      "keyColor": "#B4BEFE"
+    },
+    "break",
+    {
+      "type": "colors",
+      "symbol": "circle",
+    }
+  ]
+}
