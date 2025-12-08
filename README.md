@@ -47,7 +47,7 @@ https://github.com/user-attachments/assets/3bb6f185-2c85-457c-b1a5-d7061960975e
 ## Installation
 
 1. Install prerequisites above.
-2. Clone: `git clone https://github.com/yourusername/MHIAs-Dotfiles && cd MHIAs-Dotfiles`.
+2. Clone: `git clone https://github.com/MHashir09/MHIAs-Dotfiles && cd MHIAs-Dotfiles`.
 3. Backup existing configs, e.g: `mv ~/.zshrc ~/.zshrc.backup`.
 4. Stow what you need: `stow zsh nvim noctalia niri` while in the `MHIAs-Dotfiles` directory.
 - Having trouble using gnu stow ? Learn how to use it by this [awesome video by typecraft](https://youtu.be/NoFiYOqnC4o?si=9FyfJ1vny3PiNdUB).
