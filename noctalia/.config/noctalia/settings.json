@@ -10,7 +10,7 @@
         "sortByMostUsed": true,
         "terminalCommand": "kitty -e",
         "useApp2Unit": false,
-        "viewMode": "list"
+        "viewMode": "grid"
     },
     "audio": {
         "cavaFrameRate": 30,
@@ -98,8 +98,8 @@
                 },
                 {
                     "customFont": "",
-                    "formatHorizontal": "h:mm AP ddd MM",
-                    "formatVertical": "h:mm AP ddd MMM d",
+                    "formatHorizontal": "h:mm AP ddd d",
+                    "formatVertical": "H m AP d ddd",
                     "id": "Clock",
                     "useCustomFont": false,
                     "usePrimaryColor": true
@@ -140,8 +140,8 @@
         "generateTemplatesForPredefined": true,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "matugenSchemeType": "scheme-fruit-salad",
-        "predefinedScheme": "Tokyo Night",
+        "matugenSchemeType": "scheme-fidelity",
+        "predefinedScheme": "Gruvbox",
         "schedulingMode": "off",
         "useWallpaperColors": false
     },
@@ -218,8 +218,8 @@
         "allowPanelsOnScreenWithoutBar": true,
         "animationDisabled": false,
         "animationSpeed": 1,
-        "avatarImage": "/home/mhia/Pictures/Other-stuff/lawliet.jpg",
-        "compactLockScreen": false,
+        "avatarImage": "/home/mhia/Pictures/Other-stuff/sasaki.jpg",
+        "compactLockScreen": true,
         "dimmerOpacity": 0.6,
         "enableShadows": true,
         "forceBlackScreenCorners": false,
@@ -281,8 +281,11 @@
         "backgroundOpacity": 1,
         "enabled": true,
         "enabledTypes": [
+            2,
+            1,
+            0
         ],
-        "location": "top_right",
+        "location": "top",
         "monitors": [
         ],
         "overlayLayer": true
@@ -352,7 +355,7 @@
     },
     "templates": {
         "alacritty": false,
-        "cava": false,
+        "cava": true,
         "code": true,
         "discord": true,
         "enableUserTemplates": true,
@@ -361,7 +364,7 @@
         "ghostty": false,
         "gtk": true,
         "kcolorscheme": true,
-        "kitty": false,
+        "kitty": true,
         "pywalfox": false,
         "qt": true,
         "spicetify": false,
@@ -371,7 +374,7 @@
         "wezterm": false
     },
     "ui": {
-        "fontDefault": "GohuFont 14 Nerd Font",
+        "fontDefault": "GohuFont 11 Nerd Font",
         "fontDefaultScale": 1.02,
         "fontFixed": "GohuFont 14 Nerd Font Mono",
         "fontFixedScale": 1,
@@ -400,10 +403,10 @@
         "transitionEdgeSmoothness": 0.05,
         "transitionType": "stripes",
         "useWallhaven": false,
-        "wallhavenCategories": "111",
+        "wallhavenCategories": "110",
         "wallhavenOrder": "desc",
         "wallhavenPurity": "100",
-        "wallhavenQuery": "",
+        "wallhavenQuery": "anime brown",
         "wallhavenResolutionHeight": "",
         "wallhavenResolutionMode": "atleast",
         "wallhavenResolutionWidth": "",
