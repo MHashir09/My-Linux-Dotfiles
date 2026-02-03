@@ -1,5 +1,5 @@
 # This executes fastfetch whenever the terminal is opened
-fastfetch
+#fastfetch
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -93,11 +93,11 @@ precmd() { echo } # this adds a one line space between commands to make them loo
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='nvim'
+ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -118,7 +118,7 @@ alias v="nvim"
 alias summon="sudo pacman -S"
 alias yin="yay -S"
 alias demolish="sudo pacman -Rns"
-alias powerup="sudo pacman -Syu"
+alias update="sudo pacman -Syu && sudo yay -Syu"
 alias ga="git add"
 alias gc="git commit"
 alias gp="git push"
@@ -126,3 +126,6 @@ alias gs="git status"
 
 
 export PATH="$HOME/.spicetify:$PATH"
+export PATH=$HOME/.local/bin:$PATH
+export PATH="$HOME/bin:$PATH"
+. "/home/mhia/.deno/env"
