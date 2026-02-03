@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 return {
 	"akinsho/bufferline.nvim",
 	event = "UIEnter",

@@ -1,14 +1,85 @@
 -- This file handles themes. You can comment and uncomment the theme you dont want to use or want to use respectively, also you can add your custom themes in similar format
 
 return {
+	"ellisonleao/gruvbox.nvim",
+	name = "gruvbox",
+	priority = 2000,
+	lazy = false,
+	config = function()
+		require("gruvbox").setup({
+			contrast = "hard", -- soft | medium | hard
+			transparent_mode = true,
+			terminal_colors = true,
+			italic = {
+				strings = false,
+				emphasis = true,
+				comments = true,
+				operators = false,
+				folds = true,
+			},
+			bold = true,
+			invert_selection = false,
+			invert_signs = false,
+			invert_tabline = false,
+			invert_intend_guides = false,
+			undercurl = true,
+			underline = true,
+			dim_inactive = false,
+		})
+
+		vim.cmd.colorscheme("gruvbox")
+
+		-- Gruvbox dark palette (hard)
+		local gb = {
+			bg0   = "#1d2021",
+			bg1   = "#282828",
+			bg2   = "#32302f",
+			bg3   = "#3c3836",
+			fg0   = "#fbf1c7",
+			fg1   = "#ebdbb2",
+			fg2   = "#d5c4a1",
+			red   = "#fb4934",
+			green = "#b8bb26",
+			yellow= "#fabd2f",
+			blue  = "#83a598",
+			purple= "#d3869b",
+			aqua  = "#8ec07c",
+			gray  = "#928374",
+			orange= "#fe8019",
+		}
+
+		-- Telescope
+		vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = gb.bg3, bg = gb.bg1 })
+		vim.api.nvim_set_hl(0, "TelescopeNormal", { fg = gb.fg1, bg = gb.bg1 })
+		vim.api.nvim_set_hl(0, "TelescopeSelection", { fg = gb.yellow, bg = gb.bg2, bold = true })
+		vim.api.nvim_set_hl(0, "TelescopeSelectionCaret", { fg = gb.orange, bg = gb.bg2 })
+		vim.api.nvim_set_hl(0, "TelescopeMultiSelection", { fg = gb.fg1, bg = gb.bg3 })
+
+		vim.api.nvim_set_hl(0, "TelescopeTitle", { fg = gb.bg0, bg = gb.green, bold = true })
+		vim.api.nvim_set_hl(0, "TelescopePromptTitle", { fg = gb.bg0, bg = gb.blue, bold = true })
+		vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { fg = gb.bg0, bg = gb.purple, bold = true })
+
+		vim.api.nvim_set_hl(0, "TelescopePromptNormal", { fg = gb.fg1, bg = gb.bg2 })
+		vim.api.nvim_set_hl(0, "TelescopePromptBorder", { fg = gb.bg2, bg = gb.bg2 })
+
+		-- Neo-tree transparency
+		vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
+		vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
+	end,
+}
+
+
+--[[
+-- Catppuccin theme
+return {
 	"catppuccin/nvim",
 	name = "catppuccin",
 	priority = 2000,
 	lazy = false,
 	config = function()
 		require("catppuccin").setup({
-			flavour = "mocha", -- you can also change it to following: "latte", "frappe", "macchiato", or "mocha" if you would like a different style
-			transparent_background = false, -- set this to true for transparency
+			flavour = "mocha",
+			transparent_background = false,
 			term_colors = true,
 			styles = {
 				comments = { "italic" },
@@ -49,7 +120,6 @@ return {
 
 		vim.cmd.colorscheme("catppuccin")
 
-		-- Highlight group for telescope
 		local cp = require("catppuccin.palettes").get_palette("mocha")
 
 		vim.api.nvim_set_hl(0, "TelescopeBorder", { fg = cp.surface2, bg = cp.surface0 })
@@ -68,12 +138,14 @@ return {
 		vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
 	end,
 }
+]]
 
 --[[
+-- Rose Pine theme
 return {
   "rose-pine/neovim",
   name = "rose-pine",
-  priority = 2000,   -- To make this plugin load before every other plugin
+  priority = 2000,
   lazy = false,
   config = function()
     require("rose-pine").setup({
@@ -81,27 +153,17 @@ return {
       dark_variant = "moon",
 
       highlight_groups = {
-
-        -- Highlight group for neotree --
-
-        -- Pink file names
             NeoTreeFileName = { fg = "love" },
             NeoTreeFileIcon = { fg = "love" },
-        -- Lavender for directories (creates a soft gradient feel)
             NeoTreeDirectoryName = { fg = "iris" },
             NeoTreeDirectoryIcon = { fg = "iris" },
-        -- Softer background for tree
             NeoTreeNormal = { fg = "love", bg = "base" },
             NeoTreeNormalNC = { fg = "love", bg = "base" },
-        -- Gradient separator
             NeoTreeWinSeparator = { fg = "highlight_med", bg = "none" },
-        -- Optional: Adjust symbols and git status colors
             NeoTreeGitUntracked = { fg = "iris" },
             NeoTreeGitModified = { fg = "love" },
             NeoTreeGitAdded = { fg = "foam" },
             NeoTreeGitDeleted = { fg = "love" },
-
-        -- Highlight group for telescope --
 
             TelescopeBorder = { fg = "overlay", bg = "overlay" },
             TelescopeNormal = { fg = "subtle", bg = "overlay" },
@@ -115,7 +177,6 @@ return {
             TelescopePromptNormal = { fg = "text", bg = "surface" },
             TelescopePromptBorder = { fg = "surface", bg = "surface" },
       }
-
     })
     vim.cmd("colorscheme rose-pine")
   end,
@@ -123,6 +184,7 @@ return {
 ]]
 
 --[[
+-- Tokyo Night theme
 return {
   "folke/tokyonight.nvim",
   name = "tokyonight",
@@ -130,40 +192,25 @@ return {
   lazy = false,
   config = function()
     require("tokyonight").setup({
-      style = "moon", -- other choices are: "storm", "night", or "day" if you would like another style of this theme
-      transparent = false, -- set this to true if you want transparency
+      style = "moon",
+      transparent = false,
       styles = {
-        sidebars = "dark", -- turn this to false if you want light sidebars
-        floats = "dark",   -- turn this to false if you want light floats
+        sidebars = "dark",
+        floats = "dark",
       },
 
-      -- Highlight group overrides --
-
       on_highlights = function(hl, c)
-        -- Highlight group for neotree --
-
-        -- Soft cyan-blue file names
         hl.NeoTreeFileName = { fg = c.blue }
         hl.NeoTreeFileIcon = { fg = c.blue }
-
-        -- Lavender for directories
         hl.NeoTreeDirectoryName = { fg = c.magenta }
         hl.NeoTreeDirectoryIcon = { fg = c.magenta }
-
-        -- Slightly darker background for tree
         hl.NeoTreeNormal = { fg = c.fg, bg = c.bg_dark }
         hl.NeoTreeNormalNC = { fg = c.fg, bg = c.bg_dark }
-
-        -- Dim border separation
         hl.NeoTreeWinSeparator = { fg = c.border_highlight, bg = "none" }
-
-        -- Optional: Git status colors
         hl.NeoTreeGitUntracked = { fg = c.magenta }
         hl.NeoTreeGitModified = { fg = c.orange }
         hl.NeoTreeGitAdded = { fg = c.green }
         hl.NeoTreeGitDeleted = { fg = c.red }
-
-        -- Highlight group for telescope --
 
         hl.TelescopeBorder = { fg = c.border_highlight, bg = c.bg_dark }
         hl.TelescopeNormal = { fg = c.fg_dark, bg = c.bg_dark }
