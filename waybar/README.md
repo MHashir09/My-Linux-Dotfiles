@@ -1,10 +1,10 @@
-# Waybar Dotfiles
+# My Waybar Dotfiles
 
 Custom Waybar configuration for Niri with Gruvbox theming. Part of [MHashir09/My-Linux-Dotfiles](https://github.com/MHashir09/My-Linux-Dotfiles).
 
 ## Preview
 
-https://github.com/user-attachments/assets/6bcd8b30-4091-4b3e-830d-ae37b19ddf84
+![Preview](https://github.com/user-attachments/assets/6bcd8b30-4091-4b3e-830d-ae37b19ddf84)
 
 ## Requirements
 
