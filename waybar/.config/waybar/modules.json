@@ -103,7 +103,7 @@
 
   "custom/launcher": {
     "format": "",
-    "on-click": "rofi -show codeverse -modi 'codeverse:~/.config/rofi/scripts/codeverse-menu.sh'",
+    "on-click": "rofi -show codeverse -modi 'codeverse:~/.config/rofi/scripts/main-menu.sh'",
     "tooltip-format": "Codeverse Menu",
   }
 }

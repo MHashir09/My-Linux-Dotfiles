@@ -1,13 +1,12 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
 
   "modules-left": [
     "custom/launcher",
+    "niri/workspaces",
     "niri/window",
   ],
-
-  "modules-center": ["niri/workspaces"],
 
   "modules-right": [
     "network",

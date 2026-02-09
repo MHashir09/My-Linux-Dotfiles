@@ -1,9 +1,7 @@
 /* // Import colors // */
-
 @import "colors.css";
 
 /* // Styles // */
-
 * {
   border: 0;
   padding: 0 0;
@@ -16,11 +14,11 @@ window#waybar {
 
 #custom-launcher {
   background-color: @bg-light;
-  font-size: 16px;
+  font-size: 14px;
   color: @fg-dark;
-  border-radius: 14px;
-  padding: 3px 15px 5px 9px;
-  margin: 4px 8px;
+  border-radius: 12px;
+  padding: 2px 15px 3px 9px;
+  margin: 3px 8px;
 }
 
 #custom-launcher:hover {
@@ -29,16 +27,16 @@ window#waybar {
 }
 
 #window {
-  margin: 4px 40px 4px 0;
+  margin: 3px 40px 3px 0;
   font-style: italic;
   color: @light-yellow;
   background-color: @bg-light;
   border: none;
   opacity: 1;
-  padding: 2px 10px;
+  padding: 1px 10px;
   border: none;
   font-size: 12px;
-  border-radius: 14px;
+  border-radius: 12px;
 }
 
 #window:hover {
@@ -50,9 +48,9 @@ window#waybar {
   border-style: solid;
   background-color: @bg-light;
   opacity: 1;
-  border-radius: 14px;
-  margin: 4px 0;
-  padding: 2px 10px;
+  border-radius: 12px;
+  margin: 3px 8px 3px 4px;
+  padding: 0.3px 8px;
 }
 
 #workspaces button.focused {
@@ -78,14 +76,14 @@ window#waybar {
 #backlight,
 #custom-power,
 #custom-notification {
-  padding: 2px 0;
+  padding: 1px 0;
   border: none;
   font-size: 12px;
-  border-radius: 14px;
+  border-radius: 12px;
   color: @fg-light;
   background-color: @bg-light;
   opacity: 1;
-  margin: 4px 8px 4px 0;
+  margin: 3px 8px 3px 0;
 }
 
 #network {
@@ -109,9 +107,9 @@ window#waybar {
 }
 
 #pulseaudio {
-  font-size: 14px;
-  padding-left: 11px;
-  padding-right: 14px;
+  font-size: 12px;
+  padding-left: 11.5px;
+  padding-right: 16px;
 }
 
 #pulseaudio:hover {
@@ -165,7 +163,7 @@ window#waybar {
 
 #backlight:hover {
   background-color: @fg-light;
-  color: @green
+  color: @green;
 }
 
 #custom-notification {
@@ -191,12 +189,12 @@ window#waybar {
 
 #clock {
   color: @light-green;
-  border-radius: 14px;
-  padding: 3px 4px 3px 9px;
+  border-radius: 12px;
+  padding: 2px 4px 2px 9px;
   border: none;
   background-color: @bg-light;
   opacity: 1;
-  margin: 4px 6px 4px 0;
+  margin: 3px 6px 3px 0;
 }
 
 #clock:hover {
