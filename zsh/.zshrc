@@ -1,5 +1,5 @@
 # This executes fastfetch whenever the terminal is opened
-#fastfetch
+fastfetch
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -110,22 +110,45 @@ precmd() { echo } # this adds a one line space between commands to make them loo
 # - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
-#
-alias zshconfig="nvim ~/.zshrc"
-alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias niriconfig="nvim ~/.config/niri/config.kdl"
+# You can set your custom aliases in the format below.
+# I am using fedora so I will set alias according to dnf,
+# feel free to change them according to your own distro
+# rest are some general aliases
+alias summon="sudo dnf install"
+alias exile="sudo dnf remove"
+alias transcend="sudo dnf upgrade"
+alias sanitize="sudo dnf autoremove"
+alias hunt="dnf search"
+alias scout="dnf list installed"
+alias inspect="dnf info"
+alias logs="dnf history list"
+alias sources="dnf repolist"
+
 alias v="nvim"
-alias summon="sudo pacman -S"
-alias yin="yay -S"
-alias demolish="sudo pacman -Rns"
-alias update="sudo pacman -Syu && sudo yay -Syu"
+alias c="code"
+alias cat="bat"
+alias clr="clear"
+alias ll="ls -lah"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias als="grep '^alias' ~/.zshrc | cat -l bash -p"
+alias md="mkdir -p"
+alias rd="rmdir"
+alias e="exit"
+alias reload="source ~/.zshrc"
+
 alias ga="git add"
 alias gc="git commit"
 alias gp="git push"
 alias gs="git status"
+alias gcm="git commit -m"
 
 
-export PATH="$HOME/.spicetify:$PATH"
+# Some path related settings
 export PATH=$HOME/.local/bin:$PATH
 export PATH="$HOME/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . "/home/mhia/.deno/env"
