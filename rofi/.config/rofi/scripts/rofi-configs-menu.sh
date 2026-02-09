@@ -5,7 +5,7 @@ CONFIG_DIR="$HOME/.config"
 EDITOR="nvim"
 
 # // -- Select top-level config directory -- //
-mapfile -t apps < <(find "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' 2>/dev/null | sort -f)
+mapfile -t apps < <(find -L "$CONFIG_DIR" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' 2>/dev/null | sort -f)
 (( ${#apps[@]} == 0 )) && { notify-send "Config Manager" "No config directories found"; exit 1; }
 
 selected_app=$(printf '%s\n' "${apps[@]}" | rofi -dmenu -i -theme-str 'window { width: 720px; }')

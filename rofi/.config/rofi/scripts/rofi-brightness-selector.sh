@@ -18,5 +18,6 @@ new=$(echo -e "➯   0\n➯  10\n➯  20\n➯  30\n➯  40\n➯  50\n➯  60\n�
 if [ -n "$new" ]; then
     brightness=$(echo "$new" | grep -o '[0-9]\+')
     brightnessctl s "${brightness}%"
-    swayosd-client --brightness "${brightness}"
+    BRIGHT=$(brightnessctl get -P)
+    notify-send -h string:x-canonical-private-synchronous:brightness -h int:value:$BRIGHT " Brightness: ${BRIGHT}%"
 fi

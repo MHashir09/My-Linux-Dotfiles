@@ -1,9 +1,13 @@
 #!/bin/bash
 
-# // ask PipeWire/PulseAudio for the current volume of your default audio output //
-current=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -Po '\d+(?=%)' | head -1)
+# // -- Get current volume using wpctl -- //
+current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}')
 
-# // show menu with current highlighted //
+# // -- Cap current at 100 for menu selection
+if [ "$current" -gt 100 ]; then
+    current=100
+fi
+
 new=$(echo -e "➯   0\n➯  10\n➯  20\n➯  30\n➯  40\n➯  50\n➯  60\n➯  70\n➯  80\n➯  90\n➯  100" \
       | rofi -dmenu \
       -selected-row $((current/10)) \
@@ -12,9 +16,16 @@ new=$(echo -e "➯   0\n➯  10\n➯  20\n➯  30\n➯  40\n➯  50\n➯  60\n�
           entry { placeholder: ""; }
       ')
 
-# //  change volume to selected value //
 if [ -n "$new" ]; then
     volume=$(echo "$new" | grep -o '[0-9]\+')
-    pactl set-sink-volume @DEFAULT_SINK@ "${volume}%"
-    swayosd-client --output-volume "${volume}"
+
+    # // -- Set volume using wpctl
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ "${volume}%"
+
+    # // -- Give it a moment to update
+    sleep 0.2
+
+    # // -- Get updated volume
+    VOL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2*100)}')
+    notify-send -h string:x-canonical-private-synchronous:audio -h int:value:$VOL " Volume: ${VOL}%"
 fi

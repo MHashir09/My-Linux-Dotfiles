@@ -31,7 +31,7 @@ SELECTION=$(echo -e "$OPTIONS" | rofi -dmenu -i -p "        Capture Screen" \
     '
 )
 
-# Exit if user pressed escape or made no selection
+# // Exit if user pressed escape or made no selection
 [ -z "$SELECTION" ] && exit 0
 
 # // -- Name the screenshot -- //
@@ -40,25 +40,17 @@ FILENAME="$SCREENSHOT_DIR/screenshot_$(date +%Y%m%d_%H%M%S).png"
 # // -- Do operations based on what user selected -- //
 case "$SELECTION" in
     " Capture Full Screen")
-        grim "$FILENAME"
-        if [ -f "$FILENAME" ]; then
-            notify-send "Screenshot saved" "$FILENAME"
-            wl-copy < "$FILENAME"
-        fi
+        grim - | satty --filename - --output-filename "$FILENAME" --copy-command wl-copy --early-exit
         ;;
     " Capture Area Selection")
-        grim -g "$(slurp)" "$FILENAME" 2>/dev/null
-        if [ -f "$FILENAME" ]; then
-            notify-send "Screenshot saved" "$FILENAME"
-            wl-copy < "$FILENAME"
-        fi
+        grim -g "$(slurp)" - | satty --filename - --output-filename "$FILENAME" --copy-command wl-copy --early-exit
         ;;
     " Capture Active Window")
-        GEOM=$(niri msg --json focused-window | jq -r '"\(.x),\(.y) \(.width)x\(.height)"')
-        grim -g "$GEOM" "$FILENAME"
-        if [ -f "$FILENAME" ]; then
-            notify-send "Screenshot saved" "$FILENAME"
-            wl-copy < "$FILENAME"
+        GEOM=$(niri msg --json focused-window | jq -r '"\(.layout.pos_in_scrolling_layout[0]),\(.layout.pos_in_scrolling_layout[1]) \(.layout.window_size[0])x\(.layout.window_size[1])"')
+        if [ -z "$GEOM" ] || [ "$GEOM" = "null,null nullxnull" ]; then
+            notify-send "Error" "No active window found"
+            exit 1
         fi
+        grim -g "$GEOM" - | satty --filename - --output-filename "$FILENAME" --copy-command wl-copy --early-exit
         ;;
 esac
