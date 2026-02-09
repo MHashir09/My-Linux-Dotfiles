@@ -7,7 +7,6 @@
 // Use "spawn-sh-at-startup" to run a process at startup via shell
 
 spawn-at-startup "swaync"
-spawn-at-startup "swayosd-server"
 spawn-at-startup "waybar"
 spawn-at-startup "systemctl" "--user" "import-environment" "XDG_CURRENT_DESKTOP" "WAYLAND_DISPLAY"
 spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal"

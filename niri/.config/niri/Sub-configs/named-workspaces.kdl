@@ -1,5 +1,5 @@
 // For more info on them visit:
-// https://yalter.github.io/niri/Configuration%3A-Named-Workspaces.html
+// https://yalter.github.io/niri/Configuration%4A-Named-Workspaces.html
 
 // You can also use window-rules to make specific applications open-up only on
 // specified workspaces and control how they appear, like fullscreen or no etc.
@@ -11,21 +11,19 @@ workspace "2" {}  //  For terminals and coding
 workspace "3" {}  //  For chatting/socials
 workspace "4" {}  //  For media
 
-// Open each window in full screen mode. Turn it to false to disable this.
 window-rule {
   open-maximized true
 }
 
-
 // Workspace 1
 
 window-rule {
-  match app-id="brave"
+  match app-id="brave-browser"
   open-on-workspace "1"
 }
 
 window-rule {
-  match title="nautilus"
+  match app-id="org.gnome.Nautilus"
   open-on-workspace "1"
 }
 
@@ -38,11 +36,6 @@ window-rule {
 
 window-rule {
   match app-id="code"
-  open-on-workspace "2"
-}
-
-window-rule {
-  match app-id="zed"
   open-on-workspace "2"
 }
 

@@ -5,6 +5,7 @@ binds {
     Mod+Return  { spawn "kitty"; }
     Mod+Space   { spawn-sh "rofi -show drun"; }
     Mod+C       { spawn "code"; }
-    Mod+B       { spawn "brave"; }
-    Mod+E       { spawn "nautilus"; }
+    Mod+B       { spawn-sh "brave-browser"; }
+    Mod+E       { spawn-sh "nautilus"; }
+    Mod+D       { spawn "Discord"; }
 }
