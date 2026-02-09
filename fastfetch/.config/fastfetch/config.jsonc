@@ -1,105 +1,89 @@
 {
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
   "logo": {
-    "source": "~/.config/fastfetch/logo/shinji.png",
+    "source": "~/.config/fastfetch/logo/catboy.png",
     "type": "kitty-direct",
     "width": 26,
-    "height": 18,
+    "height": 12,
     "preserveAspectRatio": false,
     "color": {
-      "1": "#CBA6F7",
-      "2": "#89B4FA"
+      "1": "#d79921",
+      "2": "#458588"
     }
   },
   "display": {
     "separator": " => ",
     "color": {
-      "separator": "#89B4FA",
-      "title": "#CBA6F7",
-      "keys": "#CDD6F4",
-      "output": "#CDD6F4"
+      "separator": "#83a598",
+      "title": "#fabd2f",
+      "keys": "#ebdbb2",
+      "output": "#d5c4a1"
     }
   },
   "modules": [
     {
       "type": "custom",
       "format": "  MHIA デバイス情報 \n",
-      "color": "#F5C2E7",
+      "color": "#fe8019"
     },
     {
       "type": "os",
       "key": "OS",
       "format": "{pretty-name}",
-      "keyColor": "#CBA6F7"
+      "keyColor": "#b8bb26"
     },
     {
       "type": "kernel",
       "key": "Kernel",
       "format": "{release}",
-      "keyColor": "#89B4FA"
+      "keyColor": "#83a598"
     },
     {
       "type": "uptime",
       "key": "Uptime",
-      "keyColor": "#A6E3A1"
+      "keyColor": "#8ec07c"
     },
     {
       "type": "packages",
       "key": "Packages",
-      "keyColor": "#F9E2AF"
+      "keyColor": "#fabd2f"
     },
     {
       "type": "shell",
       "key": "Shell",
       "format": "{pretty-name}",
-      "keyColor": "#74C7EC"
+      "keyColor": "#d3869b"
     },
     {
       "type": "display",
       "key": "Resolution",
       "format": "{width}x{height} @ {refresh-rate}Hz",
-      "keyColor": "#F5C2E7"
-    },
-    {
-      "type": "wm",
-      "key": "WM",
-      "format": "{pretty-name}",
-      "keyColor": "#F2CDCD"
-    },
-    {
-      "type": "terminal",
-      "key": "Terminal",
-      "format": "{pretty-name}",
-      "keyColor": "#94E2D5"
+      "keyColor": "#fe8019"
     },
     {
       "type": "cpu",
       "key": "CPU",
       "format": "{name}",
-      "keyColor": "#F38BA8"
+      "keyColor": "#fb4934"
     },
     {
       "type": "gpu",
       "key": "GPU",
       "format": "{name}",
-      "keyColor": "#FAB387"
+      "keyColor": "#d65d0e"
     },
     {
       "type": "memory",
       "key": "Memory",
       "format": "{used} / {total} ({percentage}%)",
-      "keyColor": "#EBA0AC"
+      "keyColor": "#cc241d"
     },
     {
       "type": "disk",
       "key": "Disk",
       "folders": "/",
-      "keyColor": "#B4BEFE"
+      "keyColor": "#b16286"
     },
-    "break",
-    {
-      "type": "colors",
-      "symbol": "circle",
-    }
+    "break"
   ]
 }
