@@ -5,6 +5,7 @@ This is a simple neovim configuration I made for my personal use. Its my first t
 ![Neovim Configuration Demo](./nvim-demo.gif)
 
 ## Features
+
 - LSP support for languages like python, javascript, c and cpp, html and css etc.
 - Linting and formatting support using none-ls
 - File explorer with modern tree navigation
@@ -14,8 +15,8 @@ This is a simple neovim configuration I made for my personal use. Its my first t
 - Beautiful statusline and themes
 - Plugin management with lazy loading
 
-
 ## Requirements
+
 - Neovim >= 0.8
 - Git
 - curl
@@ -27,18 +28,22 @@ This is a simple neovim configuration I made for my personal use. Its my first t
 ## Installation
 
 ### Automated Installation
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/Hashir-10/Nvim-config/main/install.sh | bash
 ```
 
-##  Important Notes
+## Important Notes
+
 - This installation will backup your existing Neovim config if you have one, so it wont harm your current nvim configuration.
 - After installation, the config becomes independent (no git history)
 - You can safely modify it without affecting this repository
 - If you see some errors from mason after plugin installation it is due to a bad internet connection most probably, if you are sure that your connection is stable then open neovim in `~/.config/nvim` and wait for a while and let mason install everything. If it still fails then retry and it will work eventually.
 
 ## Usage
+
 After installation, simply run:
+
 ```bash
 nvim
 ```
@@ -46,6 +51,7 @@ nvim
 If you want to learn about vim-motions i.e vim-keybindings then type `:Tutor` in normal mode and it will open an interactive guide for you to learn about vim and vim-motions and covers eveything about vim-motions that you will use in daily development.
 
 ## Key Mappings
+
 - `CTRL + f , in normal mode` - Find files (Telescope)
 - `space + lg , in normal mode` - Live grep search
 - `ALT + 1 or any number , this number represents your tab , works in normal mode` - Change tabs
@@ -57,7 +63,8 @@ If you want to learn about vim-motions i.e vim-keybindings then type `:Tutor` in
 
 These are some keybindings I set according to my personal comfort to navigate through projects, you can change them by going to individual plugin files.
 
-##  Customization
+## Customization
+
 Feel free to modify the configuration files in `~/.config/nvim/` to suit your needs!
 All plugins are in  `~/.config/nvim/lua/plugins` directory, you can add more in this directory or modify the existing ones.
 

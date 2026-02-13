@@ -11,5 +11,13 @@ return {
 					{ section = "startup" },
 			},
 		},
+        terminal = { enabled = true },
+        notifier = { enabled = true },
 	},
+    keys = {
+        -- // -- Keybinds for snacks terminal -- // --
+        { "t", function() Snacks.terminal() end, desc = "Toggle Snacks Terminal", mode = { "n", "t" } },
+        vim.keymap.set("t", "jk", [[<C-\><C-n>]], { desc = "Exit terminal mode" }),
+        vim.keymap.set({ "n", "t" }, "tf", "<Cmd>wincmd p<CR>", { desc = "Previous Window" }),
+    },
 }

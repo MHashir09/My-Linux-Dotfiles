@@ -62,6 +62,14 @@ return {
 				end,
 			})
 
+         	-- Disable diagnostics for markdown files
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "markdown",
+				callback = function()
+					vim.diagnostic.disable(0)
+				end,
+			})
+
 			-- Show diagnostics on hover
 			vim.o.updatetime = 250
 			vim.cmd([[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]])
