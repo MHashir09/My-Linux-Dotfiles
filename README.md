@@ -1,5 +1,7 @@
 # Mhia's Linux Dotfiles
 
+[!Note] This README is not upto date, I have exams so I will update it as soon as they end.
+
 My personal Linux configuration files managed with GNU Stow. These are the configs I use daily as of now on my Linux setup( Endeavour OS ).
 
 ## Showcase
