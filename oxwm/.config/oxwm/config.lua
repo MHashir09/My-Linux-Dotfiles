@@ -178,6 +178,7 @@ oxwm.bar.set_scheme_urgent(colors.fg_light, colors.bg, colors.bg)          -- Ur
 oxwm.rule.add({ class = "kitty", tag = 2, fullscreen = true })
 oxwm.rule.add({ class = "Helium", tag = 1 })
 oxwm.rule.add({ class = "vesktop", tag = 3 })
+oxwm.rule.add({ class = "org.gnome.Nautilus", tag = 4 })
 
 -------------------------------------------------------------------------------
 -- KEYBINDINGS
