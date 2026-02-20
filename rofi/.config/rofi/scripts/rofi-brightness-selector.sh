@@ -18,6 +18,14 @@ new=$(echo -e "➯   0\n➯  10\n➯  20\n➯  30\n➯  40\n➯  50\n➯  60\n�
 if [ -n "$new" ]; then
     brightness=$(echo "$new" | grep -o '[0-9]\+')
     brightnessctl s "${brightness}%"
-    BRIGHT=$(brightnessctl get -P)
-    notify-send -h string:x-canonical-private-synchronous:brightness -h int:value:$BRIGHT " Brightness: ${BRIGHT}%"
+
+    sleep 0.1
+    BRIGHT=$(brightnessctl g)
+    MAX=$(brightnessctl m)
+    PERCENT=$((BRIGHT * 100 / MAX))
+
+    notify-send -a "Brightness" -u low -h int:value:$PERCENT -h string:synchronous:brightness "Brightness" " ${PERCENT}%"
+
+    # -- // Use this if on wayland and using swaync -- //
+    # --  notify-send -h string:x-canonical-private-synchronous:brightness -h int:value:$BRIGHT " Brightness: ${BRIGHT}%"
 fi

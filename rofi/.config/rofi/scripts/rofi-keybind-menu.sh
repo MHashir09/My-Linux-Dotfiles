@@ -1,5 +1,78 @@
 #!/usr/bin/env bash
 
+# // -- Uncomment for oxwm -- //
+
+CONFIG_FILE="$HOME/.config/oxwm/config.lua"
+LABELS_FILE="$HOME/.config/rofi/scripts/keybind-labels.conf"
+TEMP_FILE="/tmp/oxwm-keybinds.txt"
+
+# // -- Load labels -- //
+declare -A LABELS
+while IFS='|' read -r script label; do
+    [[ "$script" =~ ^#.*$ ]] && continue
+    [[ -z "$script" ]] && continue
+    LABELS["$script"]="$label"
+done < "$LABELS_FILE"
+
+> "$TEMP_FILE"
+
+awk '
+/oxwm\.key\.bind/ {
+    buffer = $0
+    while (buffer !~ /\)\)$/ && getline > 0) {
+        buffer = buffer " " $0
+    }
+    print buffer
+}
+' "$CONFIG_FILE" | while read -r line; do
+    # Extract: modifiers, key, and action
+    if [[ "$line" =~ oxwm\.key\.bind\(\{([^\}]*)\}[[:space:]]*,[[:space:]]*\"([^\"]+)\"[[:space:]]*,(.+)\)\) ]]; then
+        mods="${BASH_REMATCH[1]}"
+        key="${BASH_REMATCH[2]}"
+        action="${BASH_REMATCH[3]}"
+
+        # Simple cleanup
+        mods="${mods//modkey/Super}"
+        mods="${mods//Mod4/Super}"
+        mods="${mods//Mod1/Alt}"
+        mods="${mods//modkey2/Alt}"
+        mods="${mods//,/+}"
+        mods="${mods//\"/}"
+        mods="${mods// /}"
+
+        # Format key combo
+        if [ -z "$mods" ]; then
+            combo="$key"
+        else
+            combo="$mods+$key"
+        fi
+
+        # Try to match against labels
+        label=""
+        for script in "${!LABELS[@]}"; do
+            if [[ "$action" == *"$script"* ]]; then
+                label="${LABELS[$script]}"
+                break
+            fi
+        done
+
+        # If no label found, show raw action
+        if [ -z "$label" ]; then
+            label="$action"
+        fi
+
+        echo "$combo ⇒ $label" >> "$TEMP_FILE"
+    fi
+done
+
+sort -u "$TEMP_FILE" | rofi -dmenu -i -p "  Keybindings" \
+    -theme-str 'window { width: 600px; } listview { columns: 1; }'
+
+rm -f "$TEMP_FILE"
+
+# // -- Uncomment for niri -- //
+
+: <<'COMMENT'
 # // -- variables -- //
 KEYBINDS_DIR="$HOME/.config/niri/Keybindings"
 LABELS_FILE="$HOME/.config/rofi/scripts/keybind-labels.conf"
@@ -90,7 +163,9 @@ done
 
 # // --  rofi menu -- //
 sort -u "$TEMP_FILE" | rofi -dmenu -i \
-    -theme-str 'window { width: 900px; }'
+    -p "  Keybindings" \
+    -theme-str 'window { width: 600px; } listview { columns: 1; }'
 
 # // -- cleanup -- //
 rm -f "$TEMP_FILE"
+COMMENT

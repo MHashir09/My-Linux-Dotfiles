@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# // -- Use rofi-greenclip to use a nice and simple prebuilt clipboard manager -- //
+# // -- Install with paru -S rofi-greenclip
+
+# -- Show menu and copy selection --
+rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+
+# // -- Or you can use a manual approach with the script I made -- //
+# // -- Requires cliphist and wl-copy ( Note: This works on wayland only ) -- //
+
+: <<'COMMENT'
 # // -- Configuration and variable declarations   -- //
 LIMIT=50
 declare -A ID_MAP       # Maps display labels to clipboard IDs
@@ -51,3 +61,4 @@ SELECTION=$(echo -e "$MENU" | rofi -dmenu -i -p "Clipboard")
 # // -- Copy selected item to clipboard -- //
 cliphist decode "${ID_MAP[$SELECTION]}" 2>/dev/null | wl-copy
 notify-send "Clipboard" "Copied to clipboard"
+COMMENT

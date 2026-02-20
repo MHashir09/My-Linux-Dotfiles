@@ -34,10 +34,37 @@ SELECTION=$(echo -e "$OPTIONS" | rofi -dmenu -i -p "        Capture Screen" \
 # // Exit if user pressed escape or made no selection
 [ -z "$SELECTION" ] && exit 0
 
+# // Wait for rofi to close and windows to settle
+sleep 0.3
+
 # // -- Name the screenshot -- //
 FILENAME="$SCREENSHOT_DIR/screenshot_$(date +%Y%m%d_%H%M%S).png"
 
+# // --- Uncomment below if you are on x11 ---
+
 # // -- Do operations based on what user selected -- //
+case "$SELECTION" in
+    " Capture Full Screen")
+        flameshot full --path "$FILENAME" --clipboard
+        ;;
+    " Capture Area Selection")
+        flameshot gui --path "$FILENAME" --clipboard
+        ;;
+    " Capture Active Window")
+        # Get active window ID
+        WINDOW_ID=$(xdotool getactivewindow)
+        if [ -z "$WINDOW_ID" ]; then
+            notify-send "Error" "No active window found"
+            exit 1
+        fi
+        # Capture the active window and copy to clipboard
+        import -window "$WINDOW_ID" "$FILENAME"
+        xclip -selection clipboard -t image/png -i "$FILENAME"
+        ;;
+esac
+
+# // --- Uncomment below if you are on wayland ---
+: <<'COMMENT'
 case "$SELECTION" in
     " Capture Full Screen")
         grim - | satty --filename - --output-filename "$FILENAME" --copy-command wl-copy --early-exit
@@ -54,3 +81,4 @@ case "$SELECTION" in
         grim -g "$GEOM" - | satty --filename - --output-filename "$FILENAME" --copy-command wl-copy --early-exit
         ;;
 esac
+COMMENT

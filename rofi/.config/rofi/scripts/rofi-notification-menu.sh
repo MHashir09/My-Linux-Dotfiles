@@ -1,6 +1,7 @@
 #!/bin/bash
 
-options="󰂛  Toggle DND\n󰩺  Clear All\n󰒓  Open Settings"
+options="󰂛  Toggle DND\n󰩺  Clear All\n⟳  Restart Dunst"
+# -- Replace ⟳  Restart Dunst with 󰒓  Open Settings for swaync --
 
 # // --  Show menu -- //
 # Note: the space in the prompt "capture screen" is necessary for it to look centered, change at ur own risk
@@ -23,6 +24,33 @@ chosen=$(echo -e "$options" | rofi -dmenu -i -p "   Notification Menu" \
     '
 )
 
+# // -- Uncomment if on x11 -- //
+
+case $chosen in
+    "󰂛  Toggle DND")
+        dunstctl set-paused toggle
+        sleep 0.5
+        STATUS=$(dunstctl is-paused)
+        if [ "$STATUS" = "true" ]; then
+            :
+        else
+            notify-send "Notifications Active" "DND disabled"
+        fi
+        ;;
+    "󰩺  Close All")
+        dunstctl close-all
+        ;;
+    "⟳  Restart Dunst")
+        notify-send "Dunst Restarted"
+        sleep 0.5
+        killall dunst
+        dunst &
+        ;;
+esac
+
+# // -- Uncomment if on wayland -- //
+
+: <<'COMMENT'
 case $chosen in
     "󰂛  Toggle DND")
         swaync-client -d -sw
@@ -34,3 +62,4 @@ case $chosen in
         swaync-client -t -sw
         ;;
 esac
+COMMENT
