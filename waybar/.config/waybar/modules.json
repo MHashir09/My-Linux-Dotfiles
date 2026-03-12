@@ -13,7 +13,6 @@
 
   "clock": {
     "format": "{:%I:%M %p %a %d}  ",
-    "format-alt": "{:%A, %B %d, %Y (%R)} ",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "interval": 60,
     "calendar": {
@@ -38,7 +37,7 @@
     "format": "{icon}",
     "format-charging": "󰂄",
     "format-plugged": "󰚥",
-    "tooltip-format": "{capacity}% - {time}",
+    "tooltip-format": "{capacity}%",
     "format-icons": ["󰁻", "󰁽", "󰁾", "󰂂", "󰁹"],
     "interval": 60,
     "on-click": "~/.config/rofi/scripts/rofi-battery-power-menu.sh"
@@ -67,6 +66,21 @@
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
   },
 
+  "custom/system-info": {
+    "format": "",
+    "exec": "echo '{\"tooltip\":\"'$(source /etc/os-release && echo $PRETTY_NAME)'\"}'",
+    "return-type": "json",
+    "interval": "once",
+    "on-click": "kitty --class floating-fastfetch sh -c 'tput civis; fastfetch; sleep infinity'"
+  },
+
+  "memory": {
+    "format": "󱑾 ",
+    "tooltip-format": "{used:.1f}/{total:.1f} GB",
+    "interval": 5,
+    "on-click": "kitty btop"
+  },
+
  "backlight": {
     "format": "{icon}",
     "device": "intel_backlight",
@@ -77,22 +91,11 @@
     "on-click": "~/.config/rofi/scripts/rofi-brightness-selector.sh"
   },
 
-  "custom/notification": {
+ "custom/notification": {
+    "format": "󰂚",
     "tooltip": true,
-    "tooltip-format": "Open Notication History",
-    "format": "{icon}",
-    "format-icons": {
-        "notification": "󰂝",
-        "none": "󰂚",
-        "dnd-notification": "󰂠",
-        "dnd-none": "󰂛"
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "~/.config/rofi/scripts/rofi-notification-menu.sh",
-    "escape": true
+    "tooltip-format": "Open Notification Settings",
+    "on-click": "~/.config/rofi/scripts/rofi-notification-menu.sh"
   },
 
   "custom/power": {
@@ -104,6 +107,6 @@
   "custom/launcher": {
     "format": "",
     "on-click": "rofi -show codeverse -modi 'codeverse:~/.config/rofi/scripts/main-menu.sh'",
-    "tooltip-format": "Codeverse Menu",
+    "tooltip-format": "Main Menu",
   }
 }

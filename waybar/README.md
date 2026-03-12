@@ -2,6 +2,9 @@
 
 Custom Waybar configuration for Niri with Gruvbox theming. Part of [MHashir09/My-Linux-Dotfiles](https://github.com/MHashir09/My-Linux-Dotfiles).
 
+> [!NOTE]
+> The README is outdated, I will update it soon once I will be free from my exams.
+
 ## Preview
 
 ![Preview](https://github.com/user-attachments/assets/6bcd8b30-4091-4b3e-830d-ae37b19ddf84)
@@ -117,7 +120,7 @@ Edit `~/.config/waybar/modules.json`
 
 ### Change Colors
 
-Refer to your favorite color palette's site for colors. 
+Refer to your favorite color palette's site for colors.
 
 Edit `~/.config/waybar/colors.css`
 

@@ -59,6 +59,7 @@ window#waybar {
 
 #workspaces button {
   color: @fg-light;
+  padding: 0 6px;
 }
 
 #workspaces button:hover {
@@ -74,6 +75,8 @@ window#waybar {
 #network,
 #pulseaudio,
 #backlight,
+#custom-system-info,
+#memory,
 #custom-power,
 #custom-notification {
   padding: 1px 0;
@@ -156,12 +159,33 @@ window#waybar {
   background-color: @green;
 }
 
+#memory {
+  padding-left: 12px;
+  padding-right: 10px;
+}
+
+#memory:hover {
+  background-color: @fg-light;
+  color: @green;
+}
+
 #backlight {
   padding-left: 11px;
   padding-right: 13.5px;
 }
 
 #backlight:hover {
+  background-color: @fg-light;
+  color: @green;
+}
+
+#custom-system-info {
+  padding-left: 12px;
+  padding-right: 14.5px;
+  font-size: 14px;
+}
+
+#custom-system-info:hover {
   background-color: @fg-light;
   color: @green;
 }

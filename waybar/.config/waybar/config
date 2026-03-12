@@ -12,6 +12,8 @@
     "network",
     "pulseaudio",
     "battery",
+    "memory",
+    "custom/system-info",
     "backlight",
     "custom/notification",
     "custom/power",
