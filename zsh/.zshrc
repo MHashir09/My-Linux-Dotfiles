@@ -1,5 +1,5 @@
 # This executes fastfetch whenever the terminal is opened
-fastfetch
+#fastfetch
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
@@ -75,10 +75,8 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-autocomplete
-  fzf-zsh-plugin
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -114,18 +112,18 @@ precmd() { echo } # this adds a one line space between commands to make them loo
 # I am using fedora so I will set alias according to dnf,
 # feel free to change them according to your own distro
 # rest are some general aliases
-alias summon="sudo dnf install"
-alias exile="sudo dnf remove"
-alias transcend="sudo dnf upgrade"
-alias sanitize="sudo dnf autoremove"
-alias hunt="dnf search"
-alias scout="dnf list installed"
-alias inspect="dnf info"
-alias logs="dnf history list"
-alias sources="dnf repolist"
+alias summon="paru -S"
+alias exile="paru -Rns"
+alias transcend="paru -Syu"
+# alias sanitize="sudo dnf autoremove"
+alias hunt="paru -Ss"
+alias scout="paru -Q"
+alias inspect="paru -Qi"
+# alias logs="dnf history list"
+# alias sources="dnf repolist"
 
 alias v="nvim"
-alias c="code"
+alias f="fresh"
 alias cat="bat"
 alias clr="clear"
 alias ll="ls -lah"
@@ -136,13 +134,14 @@ alias als="grep '^alias' ~/.zshrc | cat -l bash -p"
 alias md="mkdir -p"
 alias rd="rmdir"
 alias e="exit"
-alias reload="source ~/.zshrc"
+alias rld="source ~/.zshrc"
 
 alias ga="git add"
 alias gc="git commit"
 alias gp="git push"
 alias gs="git status"
 alias gcm="git commit -m"
+alias gcl="git clone"
 
 
 # Some path related settings
@@ -151,6 +150,4 @@ export PATH="$HOME/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "/home/mhia/.deno/env"
-export GTK_CSD=0
-export LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0
+export MANPAGER="bat --color always"
