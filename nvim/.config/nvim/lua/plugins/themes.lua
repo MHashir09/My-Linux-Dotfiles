@@ -3,6 +3,6 @@
 return {
   dir = "~/.config/nvim/colors",
   config = function()
-    vim.cmd.colorscheme("Mhiatic-Beige")
+    vim.cmd.colorscheme("Mhiatic-monochrome")
   end,
 }
