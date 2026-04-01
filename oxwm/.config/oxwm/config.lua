@@ -20,54 +20,47 @@ local modkey2 = "Mod1"  -- Alt key
 -- Terminal emulator
 local terminal = "kitty"
 
--- Color palette (Gruvbox pastel/bright variant)
+-- Color palette
 local colors = {
-    -- Backgrounds
-    bg = "#1D2021",
+  	bg = "#131313", -- Deepest black
+	fg = "#c9c9c9", -- Bright silver
+	grey = "#343434", -- Dark grey (for inactive elements)
+	light_grey = "#5d5d5e", -- Mid-tone
+	silver = "#8c8c8d", -- Muted highlight
+	accent = "#c9c9c9", -- Pure highlight
 
-    -- Foregrounds
-    fg = "#C6A77E",
-    fg_light = "#f2e5bc",
-
-    -- Gruvbox colors (pastel/brighter)
-    red = "#fb4934",
-    light_red = "#ff6b5a",
-    green = "#b8bb26",
-    light_green = "#d4d987",
-    yellow = "#fabd2f",
-    light_yellow = "#ffdb6e",
-    blue = "#83a598",
-    light_blue = "#a0c4d9",
-    purple = "#d3869b",
-    light_purple = "#e7a9c0",
-    aqua = "#8ec07c",
-    light_aqua = "#a8dda2",
-    orange = "#fe8019",
-    light_orange = "#ffa157",
-
-    -- Grays
-    grey = "#a89984",
-    light_grey = "#bdae93",
-
-    -- Aliases
-    cyan = "#a8dda2",
-    lavender = "#e7a9c0",
+	-- Keeping standard names but mapping to monochrome shades
+	red = "#5d5d5e", -- Muted dark grey for urgency
+	cyan = "#8c8c8d",
+	green = "#c9c9c9",
+	lavender = "#5d5d5e",
+	light_blue = "#8c8c8d",
+	blue = "#8c8c8d",
+	purple = "#c9c9c9",
 }
 
 -- Workspace tags
-local tags = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 ", " 7 ", " 8 ", " 9 " }
+local tags = { " 1 ", " 2 ", " 3 ", " 4 ", " 5 " }
 
 -- Status bar font
-local bar_font = "JetBrainsMono Nerd Font:style=Bold:size=11"
+local bar_font = "JetBrainsMono Nerd Font:style=Bold:size=11.5"
 
 -------------------------------------------------------------------------------
 -- STATUS BAR BLOCKS
 -------------------------------------------------------------------------------
 
 local blocks = {
+    -- Separator
+    oxwm.bar.block.static({
+        text = "  │  ",
+        interval = 999999999,
+        color = colors.light_grey,
+        underline = false,
+    }),
+
     -- RAM usage
     oxwm.bar.block.ram({
-        format = "Ram: {used}/{total} GB",
+        format = "󱑾   {used} / {total} GB",
         interval = 5,
         color = colors.fg,
         underline = false,
@@ -83,7 +76,7 @@ local blocks = {
 
     -- Kernel version
     oxwm.bar.block.shell({
-        format = "OS: {}",
+        format = "  {}",
         command = "uname -r",
         interval = 999999999,
         color = colors.fg,
@@ -100,10 +93,10 @@ local blocks = {
 
     -- Battery status
     oxwm.bar.block.battery({
-        format = "Battery: {}%",
-        charging = "⚡ Charging: {}%",
-        discharging = "Battery: {}%",
-        full = "✓ Charged: {}%",
+        format = "  {}%",
+        charging = "  {}%",
+        discharging = "  {}%",
+        full = "  {}%",
         interval = 30,
         color = colors.fg,
         underline = false,
@@ -119,8 +112,8 @@ local blocks = {
 
     -- Date and time
     oxwm.bar.block.datetime({
-        format = "Date: {}  ",
-        date_format = "%a, %b %d - %I:%M %p",
+        format = "󰃮  {}  ",
+        date_format = "%a, %d - %I:%M %p",
         interval = 1,
         color = colors.fg,
         underline = false,
@@ -140,9 +133,12 @@ oxwm.set_tags(tags)
 -- LAYOUTS
 -------------------------------------------------------------------------------
 
-oxwm.set_layout_symbol("tiling", " [T] ")
-oxwm.set_layout_symbol("normie", " [F] ")
-oxwm.set_layout_symbol("tabbed", " [=] ")
+oxwm.set_layout_symbol("scrolling", "│ Layout: [Scrolling] ")
+oxwm.set_layout_symbol("tiling", "│ Layout: [Tiling] ")
+oxwm.set_layout_symbol("normie", "│ Layout: [Floating] ")
+oxwm.set_layout_symbol("tabbed", "│ Layout: [Tabbed] ")
+oxwm.set_layout_symbol("monocle", "│ Layout: [Monocle] ")
+oxwm.set_layout_symbol("grid", "│ Layout: [Monocle]  ")
 
 -------------------------------------------------------------------------------
 -- APPEARANCE
@@ -150,13 +146,13 @@ oxwm.set_layout_symbol("tabbed", " [=] ")
 
 -- Window borders
 oxwm.border.set_width(0)
-oxwm.border.set_focused_color(colors.light_yellow)
+oxwm.border.set_focused_color(colors.fg)
 oxwm.border.set_unfocused_color(colors.grey)
 
 -- Gaps
 oxwm.gaps.set_smart(false)  -- No gaps if only 1 window
 oxwm.gaps.set_inner(1, 1)  -- Horizontal, Vertical
-oxwm.gaps.set_outer(1, 1)  -- Horizontal, Vertical
+oxwm.gaps.set_outer(0, 0)  -- Horizontal, Vertical
 
 -------------------------------------------------------------------------------
 -- STATUS BAR
@@ -164,21 +160,32 @@ oxwm.gaps.set_outer(1, 1)  -- Horizontal, Vertical
 
 oxwm.bar.set_font(bar_font)
 oxwm.bar.set_blocks(blocks)
+oxwm.bar.set_hide_vacant_tags(true)
 
 -- Bar color schemes
 oxwm.bar.set_scheme_normal(colors.fg, colors.bg, colors.bg)           -- Unoccupied tags
-oxwm.bar.set_scheme_occupied(colors.fg_light, colors.bg, colors.bg)       -- Occupied tags
-oxwm.bar.set_scheme_selected(colors.orange, colors.bg, colors.bg)     -- Selected tag
-oxwm.bar.set_scheme_urgent(colors.fg_light, colors.bg, colors.bg)          -- Urgent tags
+oxwm.bar.set_scheme_occupied(colors.silver, colors.bg, colors.bg)       -- Occupied tags
+oxwm.bar.set_scheme_selected(colors.fg, colors.bg, colors.bg)     -- Selected tag
+oxwm.bar.set_scheme_urgent(colors.fg, colors.bg, colors.bg)          -- Urgent tags
 
 -------------------------------------------------------------------------------
 -- WINDOW RULES
 -------------------------------------------------------------------------------
 
-oxwm.rule.add({ class = "kitty", tag = 2, fullscreen = true })
+-- Workspace: 1 { Browser & WebApps }
 oxwm.rule.add({ class = "Helium", tag = 1 })
-oxwm.rule.add({ class = "vesktop", tag = 3 })
-oxwm.rule.add({ class = "org.gnome.Nautilus", tag = 4 })
+
+-- Workspace: 2 { Terminal & Coding }
+oxwm.rule.add({ class = "kitty", tag = 2 })
+
+-- Workspace: 3 { Files }
+oxwm.rule.add({ class = "org.gnome.Nautilus", tag = 3 })
+
+-- Workspace: 4 { Steam }
+oxwm.rule.add({ class = "steam", tag = 4 })
+
+-- Workspace: 5 { Miscellaneous }
+-- Idk what to do with this workspace lol
 
 -------------------------------------------------------------------------------
 -- KEYBINDINGS
@@ -191,8 +198,7 @@ oxwm.key.bind({ modkey }, "E", oxwm.spawn("nautilus"))
 oxwm.key.bind({ modkey }, "D", oxwm.spawn("vesktop"))
 
 -- Rofi Keybinds
-oxwm.key.bind({ modkey, modkey2 }, "Space", oxwm.spawn(
-    { "sh", "-c", "rofi -show codeverse -modi 'codeverse:~/.config/rofi/scripts/main-menu.sh'" }))
+oxwm.key.bind({ modkey, modkey2 }, "Space", oxwm.spawn({ "sh", "-c", "rofi -show codeverse -modi 'codeverse:/home/mhia/.config/rofi/scripts/main-menu.sh' -no-lazy-grab" }))
 oxwm.key.bind({ modkey, modkey2 }, "C", oxwm.spawn({ "sh", "-c", "~/.config/rofi/scripts/rofi-clipboard.sh" }))
 oxwm.key.bind({ modkey, modkey2 }, "N", oxwm.spawn({ "sh", "-c", "~/.config/rofi/scripts/rofi-notification-menu.sh" }))
 oxwm.key.bind({ modkey, modkey2 }, "B", oxwm.spawn({ "sh", "-c", "~/.config/rofi/scripts/rofi-battery-power-menu.sh" }))
@@ -211,6 +217,21 @@ oxwm.key.bind({ modkey2 }, "R", oxwm.spawn({ "sh", "-c", "~/.config/rofi/scripts
 -- Screenshot and Screenrecording
 oxwm.key.bind({}, "Print", oxwm.spawn({ "sh", "-c", "~/.config/oxwm/Scripts/screen-shot.sh" }))
 oxwm.key.bind({ modkey }, "R", oxwm.spawn({ "sh", "-c", "~/.config/oxwm/Scripts/screen-record.sh" }))
+
+-- Volume controls
+oxwm.key.bind({}, "XF86AudioRaiseVolume", oxwm.spawn({ "sh", "-c", "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+ && ~/.config/oxwm/Scripts/volume-notify.sh" }))
+oxwm.key.bind({}, "XF86AudioLowerVolume", oxwm.spawn({ "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && ~/.config/oxwm/Scripts/volume-notify.sh" }))
+oxwm.key.bind({}, "XF86AudioMute", oxwm.spawn({ "sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && ~/.config/oxwm/Scripts/volume-notify.sh" }))
+
+-- Media controls
+oxwm.key.bind({}, "XF86AudioPlay", oxwm.spawn({ "playerctl", "play-pause" }))
+oxwm.key.bind({}, "XF86AudioStop", oxwm.spawn({ "playerctl", "stop" }))
+oxwm.key.bind({}, "XF86AudioPrev", oxwm.spawn({ "playerctl", "previous" }))
+oxwm.key.bind({}, "XF86AudioNext", oxwm.spawn({ "playerctl", "next" }))
+
+-- Brightness controls
+oxwm.key.bind({}, "XF86MonBrightnessUp", oxwm.spawn({ "sh", "-c", "brightnessctl set 5%+ && ~/.config/oxwm/Scripts/brightness-notify.sh" }))
+oxwm.key.bind({}, "XF86MonBrightnessDown", oxwm.spawn({ "sh", "-c", "brightnessctl set 5%- && ~/.config/oxwm/Scripts/brightness-notify.sh" }))
 
 -- Window management
 oxwm.key.bind({ modkey }, "Q", oxwm.client.kill())
@@ -244,7 +265,7 @@ oxwm.key.bind({ modkey, "Shift" }, "J", oxwm.client.move_stack(1))
 oxwm.key.bind({ modkey, "Shift" }, "K", oxwm.client.move_stack(-1))
 
 -- Workspace switching
-for i = 1, 9 do
+for i = 1, 5 do
     oxwm.key.bind({ modkey }, tostring(i), oxwm.tag.view(i - 1))
     oxwm.key.bind({ modkey, "Shift" }, tostring(i), oxwm.tag.move_to(i - 1))
     oxwm.key.bind({ modkey, "Control" }, tostring(i), oxwm.tag.toggleview(i - 1))
@@ -257,6 +278,8 @@ end
 
 oxwm.autostart("picom")
 oxwm.autostart("dunst")
-oxwm.autostart("xset r rate 200 55")
-oxwm.autostart("~/.config/oxwm/Scripts/set-wallpaper.sh")
+oxwm.autostart("xset r rate 200 60")
 oxwm.autostart("flameshot")
+oxwm.autostart("greenclip daemon") Cuz, I feel like I dont need a clipboard Manager lol
+oxwm.autostart("~/.config/oxwm/Scripts/set-default-layout.sh")
+oxwm.autostart("~/.config/oxwm/Scripts/set-wallpaper.sh")
