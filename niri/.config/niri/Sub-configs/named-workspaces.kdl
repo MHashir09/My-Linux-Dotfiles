@@ -18,7 +18,7 @@ window-rule {
 // Workspace 1
 
 window-rule {
-  match app-id="brave-browser"
+  match app-id="helium-browser"
   open-on-workspace "1"
 }
 
@@ -31,39 +31,19 @@ window-rule {
 
 window-rule {
   match title="kitty"
-  open-on-workspace "2"
-}
-
-window-rule {
-  match app-id="code"
+  exclude app-id="floating-fastfetch"
   open-on-workspace "2"
 }
 
 // Workspace 3
 
-window-rule {
-  match title="Discord"
-  open-on-workspace "3"
-}
-
-window-rule {
-  match title="Instagram"
-  open-on-workspace "3"
-}
-
-window-rule {
-  match title="Reddit"
-  open-on-workspace "3"
-}
-
 // Workspace 4
 
+// Window rule for a floating fastfetch window ( source ~/.config/waybar/modules.json )
 window-rule {
-  match title="Komikku"
-  open-on-workspace "4"
-}
-
-window-rule {
-  match title="Netflix"
-  open-on-workspace "4"
+    match app-id="floating-fastfetch"
+    open-floating true
+    open-maximized false
+    default-column-width { fixed 740; }
+    default-window-height { fixed 360; }
 }

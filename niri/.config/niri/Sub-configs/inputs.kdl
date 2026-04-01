@@ -3,9 +3,9 @@
 input {
     keyboard {
         // Determines How fast your caret-cursor moves. Increase the value to increase the speed and vice versa.
-        repeat-rate 40
+        repeat-rate 80
         // Determines the time after which repeat of a key happens. This value is represented in "ms". Increase the value to increase the delay and vice-versa.
-        repeat-delay 200
+        repeat-delay 180
         // Comment this out if you dont want numlock to be activated automatically.
         numlock
         xkb {

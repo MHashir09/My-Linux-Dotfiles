@@ -1,3 +1,3 @@
 #!/bin/bash
-BRIGHT=$(brightnessctl get -P)
-notify-send -h string:x-canonical-private-synchronous:brightness -h int:value:$BRIGHT " Brightness: ${BRIGHT}%"
+BRIGHT=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
+notify-send -a "Brightness" -u low -h int:value:$BRIGHT -h string:synchronous:brightness "Brightness: ${BRIGHT}%"

@@ -1,2 +1,6 @@
 #!/bin/bash
-mpvpaper -o "no-audio loop panscan=1.0" "*" "$HOME/.config/niri/Wallpapers/power-gruvbox.png"
+killall awww-daemon 2>/dev/null
+sleep 0.1
+awww-daemon &
+sleep 0.5
+awww img --transition-type fade --transition-fps 60 --transition-step 4 ""
