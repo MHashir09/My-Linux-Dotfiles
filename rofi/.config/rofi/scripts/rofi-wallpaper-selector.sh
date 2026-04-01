@@ -2,9 +2,12 @@
 
 # // --- Uncomment this if you are on x11 --- //
 
+# -- : <<'COMMENT'
 # // -- Variables -- //
 WALLPAPER_DIR="$HOME/.config/oxwm/Wallpapers"
 SET_SCRIPT="$HOME/.config/oxwm/Scripts/set-wallpaper.sh"
+#WALLPAPER_DIR="$HOME/.config/oxwm/Wallpapers"
+#SET_SCRIPT="$HOME/.config/oxwm/Scripts/set-wallpaper.sh"
 
 # // -- get current active wallpaper -- //
 current_wallpaper=""
@@ -29,7 +32,7 @@ for file in "$WALLPAPER_DIR"/*; do
 
     case "$ext" in
         jpg|png|jpeg|webp) icon=" " ;;
-        *)                  icon=""   ;;
+        *)                  continue   ;;
     esac
 
     display="$icon $name"
@@ -76,24 +79,28 @@ feh --bg-scale "$relative_path"
 EOF
     chmod +x "$SET_SCRIPT"
 fi
+# -- COMMENT
 
 # // --- Uncomment this if you are on wayland --- //
 
 : <<'COMMENT'
 # // -- Variables -- //
 WALLPAPER_DIR="$HOME/.config/niri/Wallpapers"
-MPV_OPTIONS="no-audio loop panscan=1.0"
+AWWW_OPTIONS="--transition-type fade --transition-fps 60 --transition-step 4"
 SET_SCRIPT="$HOME/.config/niri/scripts/set-wallpaper.sh"
 
 # // -- get current active wallpaper -- //
 current_wallpaper=""
 if [ -f "$SET_SCRIPT" ]; then
-    current_wallpaper=$(awk -F'"' '/mpvpaper/ {print $6}' "$SET_SCRIPT" 2>/dev/null)
-    if [[ $current_wallpaper == \$HOME* ]]; then
-        current_wallpaper="${current_wallpaper/\$HOME/$HOME}"
+    current_wallpaper=$(awk -F'"' '/awww/ {print $6}' "$SET_SCRIPT" 2>/dev/null)
+    if [[ $current_wallpaper == \\$HOME* ]]; then
+        current_wallpaper="${current_wallpaper/\\$HOME/$HOME}"
     fi
 fi
 [ -z "$current_wallpaper" ] && current_wallpaper=""
+
+# // -- Ensure daemon is running -- //
+pidof awww-daemon >/dev/null || awww-daemon &
 
 # // -- map display names to real files -- //
 declare -A menu_map
@@ -108,9 +115,9 @@ for file in "$WALLPAPER_DIR"/*; do
     name="${base%.*}"
 
     case "$ext" in
-        jpg|png|jpeg) icon=" " ;;
-        mp4|gif)      icon=" " ;;
-        *)            icon=""   ;;
+        jpg|png|jpeg|webp) icon=" " ;;
+        gif|mp4)            icon=" " ;;
+        *)                  continue   ;;
     esac
 
     display="$icon $name"
@@ -146,15 +153,24 @@ if [ -n "$chosen" ] && [ -n "${menu_map[$chosen]}" ]; then
     selected_file="${menu_map[$chosen]}"
     [ -f "$selected_file" ] || exit 1
 
-    relative_path="${selected_file/#$HOME/\$HOME}"
+    relative_path="${selected_file/#$HOME/\\$HOME}"
 
-    killall mpvpaper 2>/dev/null
-    mpvpaper -o "$MPV_OPTIONS" "*" "$selected_file" &
+    # Restart daemon cleanly
+    killall awww-daemon 2>/dev/null
+    sleep 0.1
+    awww-daemon &
+    sleep 0.5  # Give more time for daemon to fully init
+
+    awww img $AWWW_OPTIONS "$selected_file"
 
     # // overwrite set-wallpaper.sh cleanly -- //
     cat << EOF > "$SET_SCRIPT"
 #!/bin/bash
-mpvpaper -o "$MPV_OPTIONS" "*" "$relative_path"
+killall awww-daemon 2>/dev/null
+sleep 0.1
+awww-daemon &
+sleep 0.5
+awww img $AWWW_OPTIONS "$1"
 EOF
     chmod +x "$SET_SCRIPT"
 fi

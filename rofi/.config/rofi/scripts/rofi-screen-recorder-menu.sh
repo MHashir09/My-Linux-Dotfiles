@@ -2,6 +2,7 @@
 
 # // --- Uncomment this if you are on x11 --- //
 
+# -- : <<'COMMENT'
 # // -- variables -- //
 OUTPUT_DIR="$HOME/Videos/Screen-recordings"
 PID_FILE="/tmp/ffmpeg-recorder.pid"
@@ -119,8 +120,10 @@ case "$SELECTION" in
         fi
         ;;
 esac
+COMMENT
 
 # // --- Uncomment this if you are on wayland --- //
+
 
 : <<'COMMENT'
 # // -- variables -- //
@@ -163,6 +166,9 @@ SELECTION=$(echo -e "$OPTIONS" | rofi -dmenu -i -p "        Record Screen" \
     '
 )
 
+# // -- Exit if no selection -- //
+[ -z "$SELECTION" ] && exit 0
+
 # // -- Do operations based on what user selected -- //
 case "$SELECTION" in
     " Start Full Screen")
@@ -181,8 +187,9 @@ case "$SELECTION" in
         ;;
     " Start Window")
         FILENAME="$OUTPUT_DIR/recording_$(date +%Y%m%d_%H%M%S).mp4"
-        # - Get window geometry -
-        GEOM=$(niri msg --json focused-window | jq -r '"\(.x),\(.y) \(.width)x\(.height)"')
+        # - Niri doesn't expose absolute window coords, so use slurp to click the window -
+        GEOM=$(slurp)
+        [ -z "$GEOM" ] && { notify-send "Recording cancelled" "No window selected"; exit 0; }
         wf-recorder -g "$GEOM" -f "$FILENAME" &
         sleep 0.5
         [ -f "$PAUSE_FILE" ] && rm "$PAUSE_FILE"

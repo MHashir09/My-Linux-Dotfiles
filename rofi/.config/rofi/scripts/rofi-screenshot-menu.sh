@@ -41,7 +41,7 @@ sleep 0.3
 FILENAME="$SCREENSHOT_DIR/screenshot_$(date +%Y%m%d_%H%M%S).png"
 
 # // --- Uncomment below if you are on x11 ---
-
+# --: <<'COMMENT'
 # // -- Do operations based on what user selected -- //
 case "$SELECTION" in
     " Capture Full Screen")
@@ -62,8 +62,10 @@ case "$SELECTION" in
         xclip -selection clipboard -t image/png -i "$FILENAME"
         ;;
 esac
+# -- COMMENT
 
 # // --- Uncomment below if you are on wayland ---
+# // -- Do operations based on what user selected -- //
 : <<'COMMENT'
 case "$SELECTION" in
     " Capture Full Screen")

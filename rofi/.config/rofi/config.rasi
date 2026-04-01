@@ -1,11 +1,9 @@
 /* // -- General configuration -- // */
 
 configuration {
-	modi:                       ["drun", "run", "window"];
+	modi:                       "drun";
     show-icons:                 true;
-    display-drun:               "󰣆 ";
-    display-run:                "";
-    display-window:             "";
+    display-drun:               "Applications";
 	drun-display-format:        "    {name}";
 }
 
@@ -73,7 +71,7 @@ textbox-prompt-colon {
     enabled:                     true;
     padding:                     0px;
     expand:                      false;
-    str:                         "    ";
+    str:                         "";
     background-color:            inherit;
     text-color:                  inherit;
 }
@@ -119,7 +117,7 @@ scrollbar {
 
 element {
     enabled:                     true;
-    spacing:                     10px;
+    spacing:                     2px;
     margin:                      0px;
     padding:                     6px;
     border-radius:               0px;
